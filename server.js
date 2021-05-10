@@ -6,7 +6,7 @@ const fs = require("fs");
 // creating the express server
 const app = express();
 // Setting Initial port for listeners
-const PORT = 8080;
+var PORT = process.env.PORT || 3001;
 //Set up app
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -15,6 +15,7 @@ app.use(express.json());
 
 //load index html and let you go to notes html when you click the button
 app.get('/', (req, res) => {
+    res.json(path.join(__dirname, "public/index.html"));
     res.sendFile(path.join(__dirname, '/public/index.html'))
 });
 
