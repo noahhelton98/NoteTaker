@@ -6,7 +6,7 @@ This application is a note taking app using express middleware. It allows you to
 
 
 ## Access
-This application is deployed on heroku and can be accessed at the URL : https://git.heroku.com/blooming-shelf-26341.git
+This application is deployed on heroku and can be accessed at the URL : https://blooming-shelf-26341.herokuapp.com/
 
 
 
