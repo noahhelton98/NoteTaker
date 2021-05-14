@@ -47,27 +47,16 @@ app.post("/api/notes", function(req, res) {
 
 
 //Delete notes - need to do it based on id 
-app.delete('/api/notes/:id', (req, res) => {
-
-    let noteID = req.params.id;
-    let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
-    console.log(noteID)
-    console.log(savedNotes[noteID])
-
-    //Need it to change the id everytime or else it doesnt let you delete out of order
-    //Or let you delete all notes 
-
-    let newID = 0;
-    for (var i = 0; i < savedNotes.length; i++){
-        savedNotes[i].id = newID.toString();
-        newID++
-    }
-    //Using filter element(didnt quite get this working fully)
-    savedNotes = savedNotes.filter(element => element.id !== noteID);
-
-    fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
-    res.json(savedNotes);
-}) 
+app.delete("/api/notes/:id", (req, res) => {
+    let allNotes = JSON.parse(fs.readFileSync("./db.json"));
+    let noteId = req.params.id
+    // after deleting note, filter out the rest to display
+    allNotes = allNotes.filter(data => {
+        return data.id != noteId;
+    })
+    fs.writeFileSync("./db.json", JSON.stringify(allNotes));
+    res.json(allNotes);
+});
 
 
 //Listener
